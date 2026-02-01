@@ -9,6 +9,7 @@
         'security/ir.model.access.csv',
         'data/ir_config_parameter.xml',
         'views/res_config_settings_views.xml',
+],
   'assets': {
     'web.assets_backend': [
         'Proyecto-CRM-Inventario-IA/static/src/components/chat_bubble/chat_bubble.xml',

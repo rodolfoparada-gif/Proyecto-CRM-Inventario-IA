@@ -9,21 +9,19 @@
         'security/ir.model.access.csv',
         'data/ir_config_parameter.xml',
         'views/res_config_settings_views.xml',
+  'assets': {
+    'web.assets_backend': [
+        'Proyecto-CRM-Inventario-IA/static/src/components/chat_bubble/chat_bubble.xml',
+        'Proyecto-CRM-Inventario-IA/static/src/components/chat_bubble/chat_bubble.js',
+        'Proyecto-CRM-Inventario-IA/static/src/components/chat_bubble/chat_bubble.scss',
+        'Proyecto-CRM-Inventario-IA/static/src/js/chat_loader.js',
     ],
-    'assets': {
-        'web.assets_backend': [
-            'agente_ia/static/src/components/chat_bubble/chat_bubble.xml',
-            'agente_ia/static/src/components/chat_bubble/chat_bubble.scss',
-            'agente_ia/static/src/components/chat_bubble/chat_bubble.js',
-            'agente_ia/static/src/js/chat_loader.js',
-        ],
-        'website.assets_frontend': [
-            'agente_ia/static/src/components/chat_bubble/chat_bubble.xml',
-            'agente_ia/static/src/components/chat_bubble/chat_bubble.scss',
-            'agente_ia/static/src/components/chat_bubble/chat_bubble.js',
-            'agente_ia/static/src/js/chat_loader.js',
-        ],
-    },
+    'website.assets_frontend': [
+        'Proyecto-CRM-Inventario-IA/static/src/components/chat_bubble/chat_bubble.js',
+        'Proyecto-CRM-Inventario-IA/static/src/components/chat_bubble/chat_bubble.xml',
+        'Proyecto-CRM-Inventario-IA/static/src/components/chat_bubble/chat_bubble.scss',
+    ],
+},
     'installable': True,
     'application': True,
     'license': 'LGPL-3',

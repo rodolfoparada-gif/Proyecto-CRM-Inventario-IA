@@ -6,8 +6,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class AIAgentController(http.Controller):
-
-    @http.route('/ai_agent/chat', type='json', auth='user')
+    @http.route('/ai_agent/chat', type='jsonrpc', auth='user')
     def chat(self, prompt, **post):
         try:
             prompt_lower = prompt.lower()

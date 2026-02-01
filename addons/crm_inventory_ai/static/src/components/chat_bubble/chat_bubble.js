@@ -10,7 +10,7 @@ export class ChatBubble extends Component {
             currentInput: "",
             isTyping: false,
             messages: [
-                { id: 1, role: "assistant", text: "¡Hola, Mi señor! Estoy listo para revisar su Inventario o CRM." }
+                { id: 1, role: "assistant", text: "¡Hola, Mi señor! ¿En qué puedo ayudarle hoy?" }
             ]
         });
         
@@ -35,6 +35,7 @@ export class ChatBubble extends Component {
             this.state.isTyping = true;
 
             try {
+                // Llamada al controlador Python corregida para Odoo 19
                 const response = await this.rpc("/ai_agent/chat", { prompt: userText });
                 this.state.messages.push({ id: Date.now() + 1, role: "assistant", text: response });
             } catch (e) {

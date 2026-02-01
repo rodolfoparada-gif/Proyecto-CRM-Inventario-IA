@@ -1,6 +1,6 @@
 {
     'name': 'Agente IA-CRM-Inventario',
-    'version': '1.0',
+    'version': '19.0.1.0',
     'category': 'Productivity',
     'summary': 'Asistente IA para Inventario y CRM en todo Odoo',
     'author': 'Mi señor',
@@ -12,17 +12,16 @@
     ],
     'assets': {
         'web.assets_backend': [
-            # Cambiado a la ruta real de tu carpeta en GitHub
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.js',
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.xml',
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.scss',
-            'Proyecto-CRM-Inventario-IA/static/src/js/chat_loader.js',
+            'agente_ia/static/src/components/chat_bubble/chat_bubble.xml',
+            'agente_ia/static/src/components/chat_bubble/chat_bubble.scss',
+            'agente_ia/static/src/components/chat_bubble/chat_bubble.js',
+            'agente_ia/static/src/js/chat_loader.js',
         ],
         'website.assets_frontend': [
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.js',
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.xml',
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.scss',
-            'Proyecto-CRM-Inventario-IA/static/src/js/chat_loader.js',
+            'agente_ia/static/src/components/chat_bubble/chat_bubble.xml',
+            'agente_ia/static/src/components/chat_bubble/chat_bubble.scss',
+            'agente_ia/static/src/components/chat_bubble/chat_bubble.js',
+            'agente_ia/static/src/js/chat_loader.js',
         ],
     },
     'installable': True,

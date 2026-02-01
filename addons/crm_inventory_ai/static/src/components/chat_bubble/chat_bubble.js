@@ -1,16 +1,24 @@
 /** @odoo-module **/
-import { Component, useState } from "@odoo/owl";
+import { Component, useState, useRef, onPatched } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { registry } from "@web/core/registry";
 
 export class ChatBubble extends Component {
-    static template = "agente_ia.ChatBubble";
-
     setup() {
         this.rpc = useService("rpc");
         this.state = useState({
             isOpen: false,
             currentInput: "",
-            messages: [{ id: 1, role: "assistant", text: "¡Hola, Mi señor! ¿Consultamos el stock?" }]
+            isTyping: false,
+            messages: [
+                { id: 1, role: "assistant", text: "¡Hola, Mi señor! ¿En qué puedo ayudarle hoy?" }
+            ]
+        });
+        
+        this.chatScrollRef = useRef("chatScroll");
+
+        onPatched(() => {
+            this.scrollToBottom();
         });
     }
 
@@ -18,14 +26,42 @@ export class ChatBubble extends Component {
         this.state.isOpen = !this.state.isOpen;
     }
 
+    scrollToBottom() {
+        if (this.chatScrollRef.el) {
+            this.chatScrollRef.el.scrollTop = this.chatScrollRef.el.scrollHeight;
+        }
+    }
+
     async onInputKeydown(ev) {
-        if (ev.key === "Enter" && this.state.currentInput.trim()) {
-            const userText = this.state.currentInput;
+        if (ev.key === "Enter" && this.state.currentInput.trim() && !this.state.isTyping) {
+            const userText = this.state.currentInput.trim();
+            
+            // Mensaje del usuario
             this.state.messages.push({ id: Date.now(), role: "user", text: userText });
             this.state.currentInput = "";
+            this.state.isTyping = true;
 
-            const response = await this.rpc("/ai_agent/chat", { prompt: userText });
-            this.state.messages.push({ id: Date.now() + 1, role: "assistant", text: response });
+            try {
+                // Llamada al backend
+                const response = await this.rpc("/ai_agent/chat", { prompt: userText });
+                
+                this.state.messages.push({ 
+                    id: Date.now() + 1, 
+                    role: "assistant", 
+                    text: response 
+                });
+            } catch (e) {
+                this.state.messages.push({ 
+                    id: Date.now() + 1, 
+                    role: "assistant", 
+                    text: "Error de conexión con el servidor." 
+                });
+            } finally {
+                this.state.isTyping = false;
+            }
         }
     }
 }
+
+// Importante: No registramos aquí para evitar circularidad si se carga en bundles distintos.
+// El registro se hace en el chat_loader.js

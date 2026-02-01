@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class AIAgentController(http.Controller):
 
-@http.route('/ai_agent/chat', type='jsonrpc', auth='user')
+    @http.route('/ai_agent/chat', type='json', auth='user')
     def chat(self, prompt, **post):
         try:
             prompt_lower = prompt.lower()
@@ -26,8 +26,11 @@ class AIAgentController(http.Controller):
             return "Error técnico en el servidor de Odoo."
 
     def _handle_inventory(self, prompt):
+        # Buscamos variantes de producto para obtener qty_available
         products = request.env['product.product'].sudo().search([('sale_ok', '=', True)], limit=5)
-        if not products: return "No hay productos con stock."
+        if not products: 
+            return "No hay productos disponibles en el sistema."
+        
         res = "📦 **Inventario:**\n"
         for p in products:
             res += f"• {p.name}: {p.qty_available} uds.\n"
@@ -35,7 +38,9 @@ class AIAgentController(http.Controller):
 
     def _handle_crm(self, prompt):
         leads = request.env['crm.lead'].sudo().search([('type', '=', 'opportunity')], limit=5)
-        if not leads: return "No hay leads activos."
+        if not leads: 
+            return "No hay leads activos en el CRM."
+        
         res = "🤝 **CRM:**\n"
         for l in leads:
             res += f"• {l.name} ({l.expected_revenue or 0.0} USD)\n"

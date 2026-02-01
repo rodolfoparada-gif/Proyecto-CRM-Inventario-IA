@@ -10,18 +10,18 @@
         'data/ir_config_parameter.xml',
         'views/res_config_settings_views.xml',
     ],
-    'assets': {
+'assets': {
         'web.assets_backend': [
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.js',
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.xml',
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.scss',
-            'Proyecto-CRM-Inventario-IA/static/src/js/chat_loader.js',
+            'crm_inventory_ai/static/src/components/**/*.js',
+            'crm_inventory_ai/static/src/components/**/*.xml',
+            'crm_inventory_ai/static/src/components/**/*.scss',
+            'crm_inventory_ai/static/src/js/chat_loader.js',
         ],
         'website.assets_frontend': [
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.js',
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.xml',
-            'Proyecto-CRM-Inventario-IA/static/src/components/**/*.scss',
-            'Proyecto-CRM-Inventario-IA/static/src/js/chat_loader.js',
+            'crm_inventory_ai/static/src/components/**/*.js',
+            'crm_inventory_ai/static/src/components/**/*.xml',
+            'crm_inventory_ai/static/src/components/**/*.scss',
+            'crm_inventory_ai/static/src/js/chat_loader.js',
         ],
     },
     'installable': True,

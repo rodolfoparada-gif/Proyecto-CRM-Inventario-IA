@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+from odoo import http
+from odoo.http import request
+import logging
+
+_logger = logging.getLogger(__name__)
+
+class AIAgentController(http.Controller):
+
 @http.route('/ai_agent/chat', type='jsonrpc', auth='user')
     def chat(self, prompt, **post):
         try:

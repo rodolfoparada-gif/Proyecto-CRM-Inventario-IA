@@ -15,8 +15,18 @@
     ],
     "assets": {
         "web.assets_backend": [
+
+            # JS Loader
             "crm_inventory_ai/static/src/js/chat_loader.js",
-          
+
+            # OWL Component JS
+            "crm_inventory_ai/static/src/components/chat/chat.js",
+
+            # OWL Template XML
+            "crm_inventory_ai/static/src/components/chat/chat.xml",
+
+            # Styles
+            "crm_inventory_ai/static/src/components/chat/chat.scss",
         ],
     },
     "installable": True,

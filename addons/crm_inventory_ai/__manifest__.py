@@ -12,16 +12,16 @@
     ],
 'assets': {
         'web.assets_backend': [
+            'crm_inventory_ai/static/src/js/chat_loader.js',
             'crm_inventory_ai/static/src/components/**/*.js',
             'crm_inventory_ai/static/src/components/**/*.xml',
             'crm_inventory_ai/static/src/components/**/*.scss',
-            'crm_inventory_ai/static/src/js/chat_loader.js',
         ],
         'website.assets_frontend': [
+            'crm_inventory_ai/static/src/js/chat_loader.js',
             'crm_inventory_ai/static/src/components/**/*.js',
             'crm_inventory_ai/static/src/components/**/*.xml',
             'crm_inventory_ai/static/src/components/**/*.scss',
-            'crm_inventory_ai/static/src/js/chat_loader.js',
         ],
     },
     'installable': True,

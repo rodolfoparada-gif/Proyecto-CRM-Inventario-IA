@@ -1,46 +1,39 @@
-# -*- coding: utf-8 -*-
 from odoo import http
 from odoo.http import request
-import logging
-
-_logger = logging.getLogger(__name__)
 
 class AIAgentController(http.Controller):
 
     @http.route('/ai_agent/chat', type='jsonrpc', auth='user')
-    def chat(self, prompt, **post):
-        try:
-            prompt_lower = prompt.lower()
-            
-            # Gestión de Inventario
-            if any(w in prompt_lower for w in ['stock', 'inventario', 'producto']):
-                return self._handle_inventory()
-            
-            # Gestión de CRM
-            if any(w in prompt_lower for w in ['crm', 'lead', 'oportunidad']):
-                return self._handle_crm()
+    def chat(self, prompt, **kw):
 
-            return "🤖 Hola, Mi señor. Puedo ayudarle con el stock de productos o revisar sus leads del CRM. ¿Qué desea consultar?"
-        except Exception as e:
-            _logger.error("Error en Agente IA: %s", str(e))
-            return "Error técnico en el servidor de Odoo."
+        prompt = (prompt or "").lower()
 
-    def _handle_inventory(self):
-        # Buscamos los primeros 5 productos con stock
-        products = request.env['product.product'].sudo().search([('sale_ok', '=', True)], limit=5)
-        if not products:
-            return "No encontré productos con stock disponible."
-        res = "📦 **Inventario Actual:**\n"
+        if "stock" in prompt or "inventario" in prompt:
+            return self._inventory()
+
+        if "crm" in prompt or "lead" in prompt:
+            return self._crm()
+
+        return "Puedo ayudarte con inventario o CRM."
+
+    def _inventory(self):
+
+        products = request.env['product.product'].sudo().search([], limit=5)
+
+        res = "Inventario:\n"
+
         for p in products:
-            res += f"• {p.name}: {p.qty_available} uds.\n"
+            res += f"{p.name} → {p.qty_available}\n"
+
         return res
 
-    def _handle_crm(self):
-        # Buscamos las oportunidades abiertas
-        leads = request.env['crm.lead'].sudo().search([('type', '=', 'opportunity')], limit=5)
-        if not leads:
-            return "No hay leads activos en el CRM."
-        res = "🤝 **Oportunidades:**\n"
+    def _crm(self):
+
+        leads = request.env['crm.lead'].sudo().search([], limit=5)
+
+        res = "Oportunidades:\n"
+
         for l in leads:
-            res += f"• {l.name} ({l.expected_revenue or 0.0} USD)\n"
+            res += f"{l.name}\n"
+
         return res

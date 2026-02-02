@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <t t-name="agente_ia.ChatBubble">
-        <div class="ai-chat-container">
-            <div t-if="state.isOpen" class="ai-chat-window">
-                <div class="ai-chat-header">Asistente IA</div>
-                <div class="ai-chat-content">
-                    <t t-foreach="state.messages" t-as="msg" t-key="msg.id">
-                        <div t-attf-class="message {{msg.role}}">
-                            <t t-esc="msg.text"/>
-                        </div>
-                    </t>
-                </div>
-                <div class="ai-chat-input">
-                    <input t-on-keydown="onInputKeydown" t-model="state.currentInput" placeholder="Escribe aquí..."/>
-                </div>
+
+<t t-name="crm_inventory_ai.ChatBubble">
+
+    <div class="ai-chat-container">
+
+        <div t-if="state.isOpen" class="ai-chat-window">
+
+            <div class="ai-chat-header">
+                Asistente IA
             </div>
-            <button class="ai-chat-button" t-on-click="toggleChat">🤖</button>
+
+            <div class="ai-chat-content" t-ref="chatScroll">
+
+                <t t-foreach="state.messages" t-as="msg" t-key="msg.id">
+                    <div t-attf-class="message {{msg.role}}">
+                        <t t-esc="msg.text"/>
+                    </div>
+                </t>
+
+            </div>
+
+            <div class="ai-chat-input">
+                <input
+                    t-model="state.currentInput"
+                    t-on-keydown="onInputKeydown"
+                    placeholder="Escribe aquí..."
+                />
+            </div>
+
         </div>
-    </t>
+
+        <button
+            class="ai-chat-button"
+            t-on-click="toggleChat">
+            🤖
+        </button>
+
+    </div>
+
+</t>
+
 </templates>

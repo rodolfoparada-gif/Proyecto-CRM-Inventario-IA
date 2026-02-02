@@ -4,9 +4,11 @@ from odoo.http import request
 
 class AIAgentController(http.Controller):
 
-    @http.route("/crm_inventory_ai/chat", type="json", auth="user")
+    @http.route("/ai_agent/chat", type="json", auth="user")
     def ai_chat(self, message):
-        return {
-            "reply": f"Recibí tu mensaje: {message}"
-        }
+        products = request.env["product.product"].sudo().search([], limit=5)
+        leads = request.env["crm.lead"].sudo().search([], limit=5)
 
+        return {
+            "reply": f"Productos: {len(products)} | Leads: {len(leads)}"
+        }

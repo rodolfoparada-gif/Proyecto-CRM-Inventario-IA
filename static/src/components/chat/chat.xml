@@ -1,13 +1,13 @@
 <t t-name="crm_inventory_ai.ChatComponent">
     <div class="ai_chat">
 
-        <button t-on-click="toggle">
+        <button class="ai_btn" t-on-click="toggle">
             AI
         </button>
 
-        <div t-if="state.open" class="ai_chat_window">
+        <div t-if="state.open" class="ai_window">
 
-            <div class="messages">
+            <div class="ai_messages">
                 <t t-foreach="state.messages" t-as="m" t-key="m.text">
                     <div t-att-class="'msg ' + m.from">
                         <t t-esc="m.text"/>
@@ -16,10 +16,9 @@
             </div>
 
             <input t-model="state.input"/>
-            <button t-on-click="send">Send</button>
+            <button t-on-click="send">Enviar</button>
 
         </div>
 
     </div>
 </t>
-

@@ -2,11 +2,21 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
+    z-index: 9999;
 }
 
-.ai_chat_window {
+.ai_btn {
+    background: #875A7B;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.ai_window {
     width: 300px;
     height: 400px;
     background: white;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
+    margin-top: 10px;
 }

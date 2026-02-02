@@ -7,6 +7,7 @@ export class ChatComponent extends Component {
 
     setup() {
         this.rpc = useService("rpc");
+
         this.state = useState({
             open: false,
             messages: [],
@@ -22,7 +23,11 @@ export class ChatComponent extends Component {
         if (!this.state.input) return;
 
         const text = this.state.input;
-        this.state.messages.push({ from: "user", text });
+
+        this.state.messages.push({
+            from: "user",
+            text,
+        });
 
         const res = await this.rpc("/ai_agent/chat", {
             message: text,
@@ -38,4 +43,3 @@ export class ChatComponent extends Component {
 }
 
 ChatComponent.template = "crm_inventory_ai.ChatComponent";
-

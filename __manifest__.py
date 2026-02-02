@@ -2,19 +2,11 @@
     "name": "CRM Inventory AI Agent",
     "version": "1.0",
     "category": "Productivity",
-    "summary": "AI Agent for CRM and Inventory",
-    "author": "Rodolfo Parada",
-
-    "depends": [
-        "base",
-        "web",
-        "stock",
-        "crm",
-        "website",
-    ],
+    "depends": ["base", "web", "stock", "crm", "website"],
 
     "data": [
         "security/ir.model.access.csv",
+        "data/ir_config_parameter.xml",
         "views/res_config_settings_views.xml",
     ],
 
@@ -35,4 +27,5 @@
 
     "installable": True,
     "application": True,
+    "license": "LGPL-3",
 }

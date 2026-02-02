@@ -1,15 +1,12 @@
-from odoo import models, api
+from odoo import models
+
 
 class AITools(models.AbstractModel):
-    _name = 'ai.tools'
-    _description = 'Herramientas de Odoo para la IA'
+    _name = "ai.tools"
+    _description = "AI Tools"
 
-    @api.model
-    def get_stock_info(self, product_name):
-        # Lógica para buscar en stock.quant o product.product
-        pass
-
-    @api.model
-    def get_crm_leads(self, partner_name):
-        # Lógica para buscar en crm.lead
-        pass
+    def get_stock(self, product_name):
+        product = self.env["product.product"].search(
+            [("name", "ilike", product_name)], limit=1
+        )
+        return product.qty_available if product else 0

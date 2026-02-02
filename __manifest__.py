@@ -3,13 +3,12 @@
     # 'application': True,
     # 'license': 'LGPL-3',
 
-
-
-
-
 {
-    'name': 'Agente IA CRM Inventario',
+    'name': 'Agente IA-CRM-Inventario',
     'version': '1.0',
+    'category': 'Productivity',
+    'summary': 'Asistente IA para Inventario y CRM en todo Odoo',
+    'author': 'Rodolfo Parada',
     'depends': ['base', 'web', 'stock', 'crm', 'website'],
     'data': [
         'security/ir.model.access.csv',
@@ -31,4 +30,6 @@
         ],
     },
     'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
 }

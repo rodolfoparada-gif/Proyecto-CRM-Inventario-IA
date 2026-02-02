@@ -1,39 +1,50 @@
 from odoo import http
 from odoo.http import request
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class AIAgentController(http.Controller):
 
     @http.route('/ai_agent/chat', type='jsonrpc', auth='user')
-    def chat(self, prompt, **kw):
+    def chat(self, prompt, **post):
+        try:
+            prompt_lower = prompt.lower()
 
-        prompt = (prompt or "").lower()
+            if any(w in prompt_lower for w in ['stock','inventario','producto']):
+                return self._handle_inventory()
 
-        if "stock" in prompt or "inventario" in prompt:
-            return self._inventory()
+            if any(w in prompt_lower for w in ['crm','lead','oportunidad']):
+                return self._handle_crm()
 
-        if "crm" in prompt or "lead" in prompt:
-            return self._crm()
+            return "Hola 👋 puedo ayudarte con Inventario o CRM."
 
-        return "Puedo ayudarte con inventario o CRM."
+        except Exception as e:
+            _logger.error("AI Agent error: %s", str(e))
+            return "Error técnico."
 
-    def _inventory(self):
-
+    def _handle_inventory(self):
         products = request.env['product.product'].sudo().search([], limit=5)
 
-        res = "Inventario:\n"
+        if not products:
+            return "No hay productos."
 
+        res = "📦 Inventario:\n"
         for p in products:
-            res += f"{p.name} → {p.qty_available}\n"
+            res += f"- {p.name}: {p.qty_available}\n"
 
         return res
 
-    def _crm(self):
+    def _handle_crm(self):
+        leads = request.env['crm.lead'].sudo().search([
+            ('type','=','opportunity')
+        ], limit=5)
 
-        leads = request.env['crm.lead'].sudo().search([], limit=5)
+        if not leads:
+            return "No hay oportunidades."
 
-        res = "Oportunidades:\n"
-
+        res = "🤝 Oportunidades:\n"
         for l in leads:
-            res += f"{l.name}\n"
+            res += f"- {l.name} ({l.expected_revenue or 0})\n"
 
         return res

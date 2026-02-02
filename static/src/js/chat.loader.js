@@ -1,8 +1,8 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { ChatBubble } from "../components/chat_bubble/chat_bubble";
+import { ChatComponent } from "../components/chat/chat";
 
-registry.category("main_components").add("AIChatBubble", {
-    Component: ChatBubble,
+registry.category("main_components").add("crm_inventory_ai_chat", {
+    Component: ChatComponent,
 });

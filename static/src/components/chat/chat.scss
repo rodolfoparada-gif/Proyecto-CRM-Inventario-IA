@@ -1,0 +1,37 @@
+.ai-chat-root {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.ai-chat-toggle {
+    background: #7c3aed;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.ai-chat-window {
+    width: 300px;
+    height: 400px;
+    background: white;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.msg.user {
+    text-align: right;
+}
+
+.msg.bot {
+    text-align: left;
+}

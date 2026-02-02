@@ -1,20 +1,9 @@
-from odoo import models, api
+from odoo import models
 
 
 class AITools(models.AbstractModel):
-    _name = "ai.tools"
-    _description = "Herramientas IA"
+    _name = "crm_inventory_ai.tools"
+    _description = "AI Tools"
 
-    @api.model
-    def get_stock_info(self, product_name):
-        product = self.env["product.product"].search(
-            [("name", "ilike", product_name)], limit=1
-        )
-        return product.qty_available if product else 0
-
-    @api.model
-    def get_crm_leads(self, name):
-        leads = self.env["crm.lead"].search(
-            [("name", "ilike", name)], limit=5
-        )
-        return leads.mapped("name")
+    def get_products(self):
+        return self.env["product.product"].search([], limit=5).mapped("name")

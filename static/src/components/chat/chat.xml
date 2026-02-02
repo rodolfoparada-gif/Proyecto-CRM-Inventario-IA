@@ -1,0 +1,32 @@
+<t t-name="crm_inventory_ai.ChatComponent">
+
+<div class="ai-chat-root">
+
+    <button class="ai-chat-toggle" t-on-click="toggle">
+        IA
+    </button>
+
+    <div t-if="state.open" class="ai-chat-window">
+
+        <div class="ai-chat-messages">
+            <t t-foreach="state.messages" t-as="msg" t-key="msg">
+                <div t-att-class="'msg ' + msg.from">
+                    <t t-esc="msg.text"/>
+                </div>
+            </t>
+        </div>
+
+        <div class="ai-chat-input">
+            <input
+                t-model="state.input"
+                placeholder="Escribe..."
+            />
+            <button t-on-click="send">Enviar</button>
+        </div>
+
+    </div>
+
+</div>
+
+</t>
+

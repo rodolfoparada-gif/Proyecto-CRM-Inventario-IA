@@ -5,7 +5,7 @@ import { useService } from "@web/core/utils/hooks";
 
 export class ChatBubble extends Component {
 
-    static template = "crm_inventory_ai.ChatBubble";
+    static template = "agente_ia.ChatBubble";
 
     setup() {
         this.rpc = useService("rpc");
@@ -15,16 +15,15 @@ export class ChatBubble extends Component {
             currentInput: "",
             isTyping: false,
             messages: [
-                { id: 1, role: "assistant", text: "Hola 👋 Soy tu asistente IA" }
-            ],
+                { id: 1, role: "assistant", text: "Hola, soy tu asistente IA." }
+            ]
         });
 
         this.chatScrollRef = useRef("chatScroll");
 
         onPatched(() => {
             if (this.chatScrollRef.el) {
-                this.chatScrollRef.el.scrollTop =
-                    this.chatScrollRef.el.scrollHeight;
+                this.chatScrollRef.el.scrollTop = this.chatScrollRef.el.scrollHeight;
             }
         });
     }
@@ -36,37 +35,27 @@ export class ChatBubble extends Component {
     async onInputKeydown(ev) {
         if (ev.key === "Enter" && this.state.currentInput.trim()) {
 
-            const text = this.state.currentInput.trim();
+            const text = this.state.currentInput;
+            this.state.currentInput = "";
 
             this.state.messages.push({
                 id: Date.now(),
                 role: "user",
-                text: text,
+                text,
             });
 
-            this.state.currentInput = "";
-            this.state.isTyping = true;
-
             try {
-                const response = await this.rpc("/ai_agent/chat", {
-                    prompt: text,
-                });
+                const res = await this.rpc("/ai_agent/chat", { prompt: text });
 
                 this.state.messages.push({
                     id: Date.now() + 1,
                     role: "assistant",
-                    text: response,
+                    text: res,
                 });
 
-            } catch {
-                this.state.messages.push({
-                    id: Date.now() + 1,
-                    role: "assistant",
-                    text: "Error conexión",
-                });
+            } catch (e) {
+                console.error(e);
             }
-
-            this.state.isTyping = false;
         }
     }
 }

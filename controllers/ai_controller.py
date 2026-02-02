@@ -9,3 +9,10 @@ class AIAgentController(http.Controller):
         service = request.env["ai.tool.service"].sudo()
         reply = service.run(message)
         return {"reply": reply}
+
+
+
+    @http.route("/ai/chat", type="json", auth="user")
+    def ai_chat(self, message):
+        response = request.env["ai.agent.engine"].sudo().process_message(message)
+        return {"response": response}

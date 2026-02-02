@@ -1,25 +1,36 @@
 {
-    "name": "CRM Inventory AI Agent",
+    "name": "Agente IA CRM Inventario",
     "version": "1.0",
     "category": "Productivity",
-    "depends": ["base", "web", "stock", "crm", "website"],
+    "summary": "Asistente IA para Inventario y CRM en todo Odoo",
+    "author": "Rodolfo Parada",
+    "license": "LGPL-3",
+
+    "depends": [
+        "base",
+        "web",
+        "stock",
+        "crm",
+        "website",
+    ],
 
     "data": [
         "security/ir.model.access.csv",
-        "data/ir_config_parameter.xml",
         "views/res_config_settings_views.xml",
     ],
 
     "assets": {
+
+        #  BACKEND (MUY IMPORTANTE)
         "web.assets_backend": [
             "crm_inventory_ai/static/src/js/chat_loader.js",
-            "crm_inventory_ai/static/src/components/chat/chat.js",
             "crm_inventory_ai/static/src/components/chat/chat.xml",
             "crm_inventory_ai/static/src/components/chat/chat.scss",
         ],
+
+        #  WEBSITE
         "website.assets_frontend": [
             "crm_inventory_ai/static/src/js/chat_loader.js",
-            "crm_inventory_ai/static/src/components/chat/chat.js",
             "crm_inventory_ai/static/src/components/chat/chat.xml",
             "crm_inventory_ai/static/src/components/chat/chat.scss",
         ],
@@ -27,5 +38,4 @@
 
     "installable": True,
     "application": True,
-    "license": "LGPL-3",
 }
